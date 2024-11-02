@@ -29,11 +29,11 @@
         const date = document.getElementById("date").value.trim();
         let validationMessage = '';
     
-        // Initialize dates
+        
         const currentDate = new Date();
         const dueDate = new Date(date);
     
-        // Validation checks
+       
         switch (true) {
         case title === '':
             validationMessage = 'Please Insert a Title';
@@ -46,22 +46,22 @@
             break;
         }
     
-        // Show validation message if any
+      
         if (validationMessage) {
         alert(validationMessage);
-        return; // Exit the function if validation fails
+        return; 
         }
     
         const task = document.createElement("div");
         task.className = "task rounded-md border border-blue-400 p-2 m-2 flex flex-col";
     
-        // Add title, priority, and due date
+       
         let c = priorityColor(priority);
         task.innerHTML = `<p class="m-2 w-max rounded bg-white-100  text-s text-gray-700">${title}</p>` 
                     + c 
                     + `<p class="m-2 w-max rounded bg-gray-100 text-s text-gray-700">${date}</p>`;
     
-        // Add status dropdown
+        
         const statusDropdown = document.createElement("select");
         statusDropdown.className = "status-dropdown bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-500";
         statusDropdown.innerHTML = `
@@ -71,7 +71,7 @@
         `;
         task.appendChild(statusDropdown);
     
-        // Add delete button
+        
         const deleteButton = document.createElement("button");
         deleteButton.className = "mt-2 bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600";
         deleteButton.textContent = "Delete";
@@ -80,17 +80,17 @@
         });
         task.appendChild(deleteButton);
     
-        // Add task to the initial board
+        
         addTaskToBoard(status, task);
     
-        // Update board when status changes
+       
         statusDropdown.addEventListener("change", (e) => {
         const newStatus = e.target.value;
         task.remove();
         addTaskToBoard(newStatus, task);
         });
     
-        // Close modal and reset form
+        
         modal.classList.add('hidden');
         form.reset();
         });
