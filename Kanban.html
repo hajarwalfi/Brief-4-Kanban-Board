@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TaskFlow est une application de gestion de tâches intuitive, permettant d'ajouter, organiser, et prioriser vos tâches. Optimisée pour la planification d'équipe et la productivité.">
+    <meta name="keywords" content="TaskFlow, gestion de tâches, Kanban, productivité, organisation, planification, to-do list, responsive, application de tâches, priorisation">
+    <meta name="author" content="YouCode">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>TaskFlow - Task manager</title>      
+</head>
+
+<!-- we need two divs one to put everything in the page and the other to put the hidden modal  -->
+
+<body class="flex flex-col w-screen h-screen text-black font-poppins">
+    <!-- this div contains everything in the page : header, welcome, boards -->
+    <div>
+
+        <!-- Header -->
+        <div class="title bg-blue-50 flex justify-center items-center gap-6 h-20 p-2">
+            <a href="#" class="hover:text-purple-400"><h5 class="font-bold">Home</h5></a>
+            <a href="#" class="hover:text-purple-400" ><h5 class="font-bold">About</h5></a>
+            <a href="#" class="hover:text-purple-400"><h5 class="font-bold">Contact</h5></a>
+            <button id="new" class="focus:outline-none bg-blue-200 px-4 py-3 rounded-full flex gap-4 hover:bg-white hover:text-blue-800"><h5 class="font-bold">New Task</h5><img src="img/add-task.svg" alt="an add task icon"></button>
+        </div>
+
+        <!-- Welcome -->
+        <div class="px-10 mt-6">
+            <h1 class="text-2xl font-bold text-center">Welcome to your task manager</h1>
+        </div>
+
+        <!-- Task Boards : it will contain three boards : (todo, doing, done) -->
+        <div class="boards p-7 grid md:grid-cols-3 sm:grid-cols-1 gap-8">
+
+            <!-- To Do Board -->
+            <div id="todo-board" class="h-80 bg-blue-100 bg-opacity-45 p-4 rounded-md text-center overflow-auto">
+                <div class="title flex justify-center gap-4 text-center h-[40px] p-[5px] border rounded-xl border-solid border-blue-500">
+                    <h5 class="text-black font-bold">To Do</h5>
+                    <span id="todo-counter" class="bg-blue-200 w-6">0</span>
+                </div>
+                <div class="tasks flex flex-col overflow-auto"></div>
+            </div>
+
+            <!-- Doing Board -->
+            <div id="doing-board" class="h-80 bg-yellow-100 bg-opacity-45 p-4 rounded-md text-center overflow-auto">
+                <div class="title flex justify-center gap-4 text-center h-[40px] p-[5px] border rounded-xl border-solid border-yellow-500">
+                    <h5 class="text-black font-bold">Doing</h5>
+                    <span id="doing-counter" class="bg-yellow-200 w-6">0</span>
+                </div>
+                <div class="tasks flex flex-col overflow-auto"></div>
+            </div>
+
+            <!-- Done Board -->
+            <div id="done-board" class="h-80 bg-green-100 bg-opacity-45 p-4 rounded-md text-center overflow-auto">
+                <div class="title flex justify-center gap-4 text-center h-[40px] p-[5px] border rounded-xl border-solid border-green-500">
+                    <h5 class="text-black font-bold">Done</h5>
+                    <span id="done-counter" class="bg-green-200 w-6">0</span>
+                </div>
+                <div class="tasks flex flex-col overflow-auto"></div>
+            </div>
+        </div>
+        <!-- end boards -->
+
+    </div>
+
+    <!-- start Modal -->
+    <div id="modal" class="hidden fixed inset-0 flex items-center justify-center z-20">
+
+        <div class="bg-blue-50 w-72 p-5 rounded-lg">
+            <form id="form" class="flex flex-col gap-1">
+                <div class="flex flex-col gap-1">
+                    <label for="title">Task:</label>
+                    <input type="text" id="title" name="title" placeholder="Enter your task" class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="Description">Description:</label>
+                    <input type="text" id="Description" name="Description" placeholder="Description" class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="status">Status:</label>
+                    <select id="status" class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400">
+                        <option value="to-do">To do</option>
+                        <option value="doing">Doing</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="priority">Priority:</label>
+                    <select id="priority" class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400">
+                        <option value="P1">P1</option>
+                        <option value="P2">P2</option>
+                        <option value="P3">P3</option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="date">Due Date</label>
+                    <input type="date" id="date" class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400">
+                </div>
+            </form>
+            <button id="save" class="mt-4 bg-blue-200 w-full text-white hover:bg-blue-400 py-2 rounded-md">Save</button>
+            <button id="cancel" class="mt-4 bg-red-200 w-full text-white hover:bg-red-400 py-2 rounded-md">Cancel</button>
+        </div>
+    
+    </div>
+    <!-- end modal -->
+
+    <!-- Start Footer -->
+    <div class="bg-blue-50 p-6">
+
+        <!-- footer head -->
+        <div class="headfooter px-8 flex gap-5 justify-between">
+            <div class="logo flex items-center mb-4 gap-4">
+                <img src="img/Logo.png" class="w-20 h-20" alt="logo">
+            </div>
+            <div class="social flex items-center gap-4 mb-4">
+                <h4 class="font-bold text-blue-800">Follow Us</h4>
+                <ul class="flex gap-4">
+                    <li><i class="fa-brands fa-facebook" style="color: #2b67d6;"></i></li>
+                    <li><i class="fa-brands fa-instagram" style="color: #2b67d6;"></i></li>
+                    <li><i class="fa-brands fa-twitter" style="color: #2b67d6;"></i></li>
+                    <li><i class="fa-brands fa-linkedin" style="color: #2b67d6;"></i></li>
+                </ul>
+            </div>
+        </div>
+        <!-- End footer head -->
+
+        <!-- secondfooter -->
+        <div class="grid md:grid-cols-3 sm:grid-cols-1 text-center gap-4">
+            <div>
+                <h4 class="font-bold text-blue-800">About Us</h4>
+                <ul class="gap-4">
+                    <li>Home</li>
+                    <li>Contact</li>
+                    <li>Services</li>
+                    <li>Careers</li>
+            </div>
+            <div>
+                <h4 class="font-bold text-blue-800">Services</h4>
+                <ul class="gap-4">
+                    <li>Newsletter</li>
+                    <li>Goals</li>
+                    <li>Visions</li>
+                    <li>Careers</li>
+            </div>
+            <div>
+                <h4 class="font-bold text-blue-800">Blog</h4>
+                <ul class="gap-4">
+                    <li>Productivity</li>
+                    <li>Tips</li>
+                    <li>Success</li>
+                    <li>Kanban</li>
+            </div>
+
+
+        </div>
+        <!-- End secondfooter -->
+
+        <!-- Start Thirdfooter -->
+        <div class="copyright text-center pt-4">
+            <p class="text-sm text-gray-400">© 2024 TaskFlow. All rights reserved.</p>
+        </div>
+        <!-- Start Thirdfooter -->
+         
+    </div> 
+    <!-- End Footer -->
+     <script src="script.js"></script>
+  
+</body>
+</html>
