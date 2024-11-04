@@ -25,7 +25,7 @@
             <a href="#" class="hover:text-purple-400"><h5 class="font-bold">Home</h5></a>
             <a href="#" class="hover:text-purple-400" ><h5 class="font-bold">About</h5></a>
             <a href="#" class="hover:text-purple-400"><h5 class="font-bold">Contact</h5></a>
-            <button id="new" class="focus:outline-none bg-blue-200 px-4 py-3 rounded-full flex gap-4 hover:bg-white hover:text-blue-800"><h5 class="font-bold">New Task</h5><img src="img/add-task.svg" alt="an add task icon"></button>
+            <button id="new" class="focus:outline-none bg-blue-200 px-4 py-3 rounded-full flex gap-4 hover:bg-white hover:text-blue-800"><span class="font-bold">New Task</span><img src="img/add-task.svg" alt="an add task icon"></button>
         </div>
 
         <!-- Welcome -->
@@ -40,7 +40,7 @@
             <div id="todo-board" class="h-80 bg-blue-100 bg-opacity-45 p-4 rounded-md text-center overflow-auto">
                 <div class="title flex justify-center gap-4 text-center h-[40px] p-[5px] border rounded-xl border-solid border-blue-500">
                     <h5 class="text-black font-bold">To Do</h5>
-                    <span id="todo-counter" class="bg-blue-200 w-6">0</span>
+                    <span id="todo-count" class="bg-blue-200 w-6">0</span>
                 </div>
                 <div class="tasks flex flex-col overflow-auto"></div>
             </div>
@@ -49,7 +49,7 @@
             <div id="doing-board" class="h-80 bg-yellow-100 bg-opacity-45 p-4 rounded-md text-center overflow-auto">
                 <div class="title flex justify-center gap-4 text-center h-[40px] p-[5px] border rounded-xl border-solid border-yellow-500">
                     <h5 class="text-black font-bold">Doing</h5>
-                    <span id="doing-counter" class="bg-yellow-200 w-6">0</span>
+                    <span id="doing-count" class="bg-yellow-200 w-6">0</span>
                 </div>
                 <div class="tasks flex flex-col overflow-auto"></div>
             </div>
@@ -58,7 +58,7 @@
             <div id="done-board" class="h-80 bg-green-100 bg-opacity-45 p-4 rounded-md text-center overflow-auto">
                 <div class="title flex justify-center gap-4 text-center h-[40px] p-[5px] border rounded-xl border-solid border-green-500">
                     <h5 class="text-black font-bold">Done</h5>
-                    <span id="done-counter" class="bg-green-200 w-6">0</span>
+                    <span id="done-count" class="bg-green-200 w-6">0</span>
                 </div>
                 <div class="tasks flex flex-col overflow-auto"></div>
             </div>
@@ -137,6 +137,7 @@
                     <li>Contact</li>
                     <li>Services</li>
                     <li>Careers</li>
+                </ul>
             </div>
             <div>
                 <h4 class="font-bold text-blue-800">Services</h4>
@@ -145,6 +146,7 @@
                     <li>Goals</li>
                     <li>Visions</li>
                     <li>Careers</li>
+                </ul>
             </div>
             <div>
                 <h4 class="font-bold text-blue-800">Blog</h4>
@@ -153,6 +155,7 @@
                     <li>Tips</li>
                     <li>Success</li>
                     <li>Kanban</li>
+                </ul>
             </div>
 
 
